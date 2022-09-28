@@ -4,10 +4,7 @@
   "overrides": [
     {
       "files": ["*.ts"],
-      "extends": [
-        "plugin:@nrwl/nx/angular",
-        "plugin:@angular-eslint/template/process-inline-templates"
-      ],
+      "extends": ["plugin:@nrwl/nx/angular", "plugin:@angular-eslint/template/process-inline-templates"],
       "rules": {
         "@angular-eslint/directive-selector": [
           "error",
@@ -23,6 +20,36 @@
             "type": "element",
             "prefix": "orient",
             "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/prefer-on-push-component-change-detection": ["error"],
+        "@angular-eslint/relative-url-prefix": ["error"],
+        "@typescript-eslint/no-inferrable-types": "off",
+        "@typescript-eslint/no-explicit-any": "error",
+        "@typescript-eslint/explicit-member-accessibility": [
+          "error",
+          {
+            "accessibility": "explicit",
+            "overrides": {
+              "accessors": "explicit",
+              "constructors": "off",
+              "methods": "explicit",
+              "properties": "explicit",
+              "parameterProperties": "explicit"
+            }
+          }
+        ],
+        "@typescript-eslint/typedef": [
+          "error",
+          {
+            "arrayDestructuring": false,
+            "arrowParameter": true,
+            "memberVariableDeclaration": true,
+            "objectDestructuring": false,
+            "parameter": true,
+            "propertyDeclaration": true,
+            "variableDeclaration": true,
+            "variableDeclarationIgnoreFunction": true
           }
         ]
       }
