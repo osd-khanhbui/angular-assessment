@@ -14,11 +14,11 @@
         "polyfills": "apps/assessment/src/polyfills.ts",
         "tsConfig": "apps/assessment/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": [
-          "apps/assessment/src/favicon.ico",
-          "apps/assessment/src/assets"
-        ],
+        "assets": ["apps/assessment/src/favicon.ico", "apps/assessment/src/assets"],
         "styles": ["apps/assessment/src/styles.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": ["node_modules/"]
+        },
         "scripts": []
       },
       "configurations": {
@@ -75,10 +75,7 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "apps/assessment/**/*.ts",
-          "apps/assessment/**/*.html"
-        ]
+        "lintFilePatterns": ["apps/assessment/**/*.ts", "apps/assessment/**/*.html"]
       }
     },
     "test": {

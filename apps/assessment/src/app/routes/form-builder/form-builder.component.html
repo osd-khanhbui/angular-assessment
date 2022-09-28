@@ -1,0 +1,48 @@
+<div *ngIf="formService.questions$ | async as questions"
+     class="form-builder">
+  <div class="question-container">
+    <div *ngFor="let question of questions; index as i"
+         class="question-answer">
+      <div class="question-title">
+        {{ question.title }}
+      </div>
+
+      <mat-form-field *ngIf="question.type === 'Paragraph'"
+                      class="control"
+                      appearance="fill">
+        <mat-label>Your answer</mat-label>
+        <input type="text"
+               [formControl]="getControls(questionAnswer.controls[i])"
+               matInput>
+      </mat-form-field>
+
+      <ng-container *ngIf="question.type === 'Checkbox'">
+        <div class="checkbox-container">
+          <ng-container *ngFor="let option of question.options">
+            <mat-checkbox class="example-margin"
+                          [checked]="isOptionChecked(option.title, i)"
+                          [value]="option.title"
+                          (change)="checkboxOptionChange($event, option.title, i)">
+              {{ option.title }}
+            </mat-checkbox>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <button class="add-button"
+            (click)="openDialog()"
+            mat-raised-button
+            color="accent">Add new question</button>
+
+    <button *ngIf="questions.length > 0"
+            class="submit-button"
+            (click)="submitAnswer()"
+            mat-raised-button
+            color="primary">
+      Submit answer
+    </button>
+  </div>
+</div>

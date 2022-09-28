@@ -1,0 +1,33 @@
+<h2>Review My Answers</h2>
+
+<div class="question-container">
+  <div *ngFor="let question of formService.questions$ | async; index as i"
+       class="question-answer">
+    <div class="question-title">
+      {{ question.title }}
+    </div>
+
+    <mat-form-field *ngIf="question.type === 'Paragraph'"
+                    class="control"
+                    appearance="fill">
+      <mat-label>Your answer</mat-label>
+      <input type="text"
+             [value]="question.answer || ''"
+             matInput
+             disabled>
+    </mat-form-field>
+
+    <ng-container *ngIf="question.type === 'Checkbox'">
+      <div class="checkbox-container">
+        <ng-container *ngFor="let option of question.options">
+          <p>
+            <mat-checkbox [checked]="(question.answer || []).indexOf(option.title) > -1"
+                          disabled>{{ option.title }}</mat-checkbox>
+          </p>
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<a routerLink="/form/builder">Back to Forms Builder</a>

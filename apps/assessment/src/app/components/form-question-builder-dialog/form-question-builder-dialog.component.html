@@ -1,0 +1,58 @@
+<div class="form-question-builder"
+     [formGroup]="addQuestionForm">
+  <div class="title">Add new question</div>
+  <div class="label">Choose your question type:</div>
+  <mat-radio-group formControlName="questionType">
+    <mat-radio-button *ngFor="let season of questionTypes"
+                      [value]="season">
+      {{ season }}
+    </mat-radio-button>
+  </mat-radio-group>
+
+  <div class="label">Config your question:</div>
+  <ng-container>
+    <mat-form-field class="control"
+                    appearance="fill">
+      <mat-label>Question title</mat-label>
+      <input type="text"
+             matInput
+             formControlName="questionTitle">
+    </mat-form-field>
+
+    <ng-container *ngIf="questionType === 'Checkbox'">
+      <div *ngFor="let control of questionOptions.controls; index as i">
+        <mat-form-field class="control"
+                        appearance="fill">
+          <mat-label>Option value</mat-label>
+          <input type="text"
+                 [formControl]="getControls(questionOptions.controls[i])"
+                 matInput>
+          <button matSuffix
+                  color="accent"
+                  mat-button>Remove</button>
+        </mat-form-field>
+      </div>
+
+      <ng-container *ngIf="!questionOptions.length">
+        <div class="empty-option">
+          <div>There is no option added</div>
+        </div>
+      </ng-container>
+
+      <button *ngIf="questionOptions.length < 5"
+              (click)="addOption()"
+              mat-button
+              color="primary">Add new option</button>
+    </ng-container>
+  </ng-container>
+
+  <div class="label">Additional information:</div>
+  <mat-checkbox class="example-margin"
+                formControlName="isRequired">This question is required</mat-checkbox>
+
+  <div class="toolbar">
+    <button (click)="submit()"
+            mat-raised-button
+            color="primary">Submit</button>
+  </div>
+</div>
